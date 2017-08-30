@@ -1,39 +1,41 @@
 <idea-plugin>
-  <id>com.gfb.golang_profiler_tool</id>
-  <name>Golang profiler tool</name>
-  <version>1.0</version>
-  <vendor email="go.for.broke1006@gmail.com" url="https://www.facebook.com/goforbroke1006">GoForBroke</vendor>
+    <id>com.gfb.golang_profiler_tool</id>
+    <name>Golang profiler tool</name>
+    <version>1.0</version>
+    <vendor email="go.for.broke1006@gmail.com" url="https://www.facebook.com/goforbroke1006">GoForBroke</vendor>
 
-  <description><![CDATA[
-      I need interactive profiler for coding under Golang.<br>
-      I going write my own tool.
+    <description><![CDATA[
+        I need interactive profiler for coding under Golang.<br>
+        I going write my own tool.
     ]]></description>
 
-  <change-notes><![CDATA[
-      It is blank plugin now.
+    <change-notes><![CDATA[
+        It is blank plugin now.
     ]]>
-  </change-notes>
+    </change-notes>
 
-  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-  <idea-version since-build="145.0"/>
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="145.0"/>
 
-  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-       on how to target different products -->
-  <!-- uncomment to enable plugin in all products
-  <depends>com.intellij.modules.lang</depends>
-  -->
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
 
-  <extensions defaultExtensionNs="com.intellij">
-    <!-- Add your extensions here -->
-  </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <configurationType
+                implementation="com.gfb.golang_profiler_tool.run.configuration.GolangProfilerRunConfigurationType"/>
+    </extensions>
 
-  <actions>
-    <!-- Add your actions here -->
-    <action id="GfbGolangProfiler.Reload" class="com.gfb.golang_profiler_tool.ReloadAction" text="Reload"
-            description="Reload profiling data">
-      <add-to-group group-id="ToolsMenu" anchor="first"/>
-      <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt P"/>
-    </action>
-  </actions>
+    <actions>
+        <!-- Add your actions here -->
+        <action id="GfbGolangProfiler.Reload" class="com.gfb.golang_profiler_tool.ReloadAction" text="Reload"
+                description="Reload profiling data">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt P"/>
+        </action>
+    </actions>
 
 </idea-plugin>
