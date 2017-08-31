@@ -11,6 +11,7 @@ import javax.swing.*;
 /**
  * Created by SCherk01 on 30.08.17.
  */
+// TODO: need to set correctly
 public class GolangFileType extends LanguageFileType {
     public static final GolangFileType INSTANCE = new GolangFileType();
 
