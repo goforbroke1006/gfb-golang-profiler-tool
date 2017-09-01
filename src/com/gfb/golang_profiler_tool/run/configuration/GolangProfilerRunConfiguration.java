@@ -13,7 +13,8 @@ import org.jetbrains.annotations.Nullable;
  * Created by SCherk01 on 30.08.17.
  */
 public class GolangProfilerRunConfiguration extends RunConfigurationBase {
-    private String scriptFilename;
+    private String scriptFilename = "/home/SCherk01/projects/go-learn/monolog_analyzer.go";
+    private String programRunParameters = "-file=/home/SCherk01/test.log";
 
     public GolangProfilerRunConfiguration(Project project, GolangProfilerConfigurationFactory factory, String name) {
         super(project, factory, name);
@@ -42,5 +43,13 @@ public class GolangProfilerRunConfiguration extends RunConfigurationBase {
 
     public void setScriptFilename(String scriptFilename) {
         this.scriptFilename = scriptFilename;
+    }
+
+    public String getProgramRunParameters() {
+        return programRunParameters;
+    }
+
+    public void setProgramRunParameters(String programRunParameters) {
+        this.programRunParameters = programRunParameters;
     }
 }

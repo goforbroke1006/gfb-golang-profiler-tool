@@ -1,8 +1,9 @@
 package com.gfb.golang_profiler_tool.run.configuration;
 
+import com.gfb.golang_profiler_tool.run.configuration.execution.BashWrapCommandLine;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.*;
-import com.intellij.execution.process.ProcessHandler;
+import com.intellij.execution.process.*;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,15 +21,20 @@ public class GolangProfileCommandLineState extends CommandLineState {
     @NotNull
     @Override
     protected ProcessHandler startProcess() throws ExecutionException {
-        GeneralCommandLine commandLine = new PtyCommandLine();
-        commandLine.setExePath("/usr/local/go/bin/go"); // TODO: workaround for first tests on IDEA under Centos
-        commandLine.setWorkDirectory(getEnvironment().getProject().getBasePath());
-
+        String goExePath = "/usr/local/go/bin/go"; // TODO: workaround for first tests on IDEA under Centos
 
         String scriptFilename = configuration.getScriptFilename();
-        String binFilename = scriptFilename.replace(".go", "");
-        commandLine.addParameters("build", "-o", binFilename, scriptFilename);
+        final String binFilename = scriptFilename.replace(".go", "");
+        String profCpuFile = binFilename + "-cpu.prof";
 
-        return JavaCommandLineStateUtil.startProcess(commandLine, true);
+        BashWrapCommandLine farsh = new BashWrapCommandLine(); // TODO: workaround for running several commands in shell
+
+        farsh.addParameters(goExePath + " build -o " + binFilename + " " + scriptFilename);
+        farsh.addParameters(binFilename + " -cpuprofile=" + profCpuFile + " " + configuration.getProgramRunParameters());
+        farsh.addParameters("echo \"list main.main\" | " + goExePath + " tool pprof " + profCpuFile + " >> " + binFilename + "-cpu.out");
+
+        final OSProcessHandler osph = new ColoredProcessHandler(farsh);
+        ProcessTerminatedListener.attach(osph);
+        return osph;
     }
 }

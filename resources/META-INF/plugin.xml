@@ -31,7 +31,7 @@
 
     <actions>
         <!-- Add your actions here -->
-        <action id="GfbGolangProfiler.Reload" class="com.gfb.golang_profiler_tool.ReloadAction" text="Reload"
+        <action id="GfbGolangProfiler.Reload" class="com.gfb.golang_profiler_tool.action.ReloadAction" text="Reload"
                 description="Reload profiling data">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt P"/>

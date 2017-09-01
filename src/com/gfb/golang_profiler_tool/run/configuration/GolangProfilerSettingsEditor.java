@@ -1,5 +1,6 @@
 package com.gfb.golang_profiler_tool.run.configuration;
 
+import com.intellij.openapi.editor.textarea.TextAreaDocument;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.options.ConfigurationException;
@@ -8,6 +9,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.ComponentWithBrowseButton;
 import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
+import com.intellij.openapi.ui.PanelWithText;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -17,7 +19,8 @@ import javax.swing.*;
  */
 public class GolangProfilerSettingsEditor extends SettingsEditor<GolangProfilerRunConfiguration> {
     private Project project;
-    private TextFieldWithBrowseButton fieldWithBrowseButton;
+    private TextFieldWithBrowseButton scriptNameTextField;
+    private JTextArea programRunArgumentsTextArea;
 
     public GolangProfilerSettingsEditor(Project project) {
         super();
@@ -30,30 +33,49 @@ public class GolangProfilerSettingsEditor extends SettingsEditor<GolangProfilerR
     }
 
     @Override
-    protected void applyEditorTo(@NotNull GolangProfilerRunConfiguration golangProfilerRunConfiguration) throws ConfigurationException {
+    protected void applyEditorTo(@NotNull GolangProfilerRunConfiguration configuration) throws ConfigurationException {
         // TODO: I do not know how data applies from editor to configuration and vice versa
-        if (!fieldWithBrowseButton.getText().equals("") && !fieldWithBrowseButton.getText().equals(golangProfilerRunConfiguration.getScriptFilename())) {
-            golangProfilerRunConfiguration.setScriptFilename(fieldWithBrowseButton.getText());
+
+        if (!scriptNameTextField.getText().isEmpty() && !scriptNameTextField.getText().equals(configuration.getScriptFilename())) {
+            configuration.setScriptFilename(scriptNameTextField.getText());
         } else {
-            fieldWithBrowseButton.setText(golangProfilerRunConfiguration.getScriptFilename());
+            scriptNameTextField.setText(configuration.getScriptFilename());
+        }
+
+        if (!programRunArgumentsTextArea.getText().isEmpty() && !programRunArgumentsTextArea.getText().equals(configuration.getProgramRunParameters())) {
+            configuration.setProgramRunParameters(programRunArgumentsTextArea.getText());
+        } else {
+            programRunArgumentsTextArea.setText(configuration.getProgramRunParameters());
         }
     }
 
     @NotNull
     @Override
     protected JComponent createEditor() {
-        JPanel myPanel = new JPanel();
+        JPanel mainPanel = new JPanel();
 
-        LabeledComponent<ComponentWithBrowseButton> myMainClass = new LabeledComponent<ComponentWithBrowseButton>();
+        {
+            LabeledComponent<ComponentWithBrowseButton> scriptNameLabel = new LabeledComponent<ComponentWithBrowseButton>();
+            scriptNameLabel.setText("Script filename");
 
-        FileChooserDescriptor descriptor = FileChooserDescriptorFactory
-                .createSingleFileDescriptor();
-        fieldWithBrowseButton = new TextFieldWithBrowseButton();
-        fieldWithBrowseButton.addBrowseFolderListener("Choose golang script", "Choose file", project, descriptor);
-        myMainClass.setComponent(fieldWithBrowseButton);
+            FileChooserDescriptor descriptor = FileChooserDescriptorFactory.createSingleFileDescriptor();
+            scriptNameTextField = new TextFieldWithBrowseButton();
+            scriptNameTextField.addBrowseFolderListener("Choose golang script", "Choose file", project, descriptor);
+            scriptNameLabel.setComponent(scriptNameTextField);
 
-        myPanel.add(myMainClass);
+            mainPanel.add(scriptNameLabel);
+        }
 
-        return myPanel;
+        {
+            LabeledComponent<JTextArea> argumentsLabel = new LabeledComponent<JTextArea>();
+            argumentsLabel.setText("Program run arguments");
+
+            programRunArgumentsTextArea = new JTextArea();
+            argumentsLabel.setComponent(programRunArgumentsTextArea);
+
+            mainPanel.add(argumentsLabel);
+        }
+
+        return mainPanel;
     }
 }

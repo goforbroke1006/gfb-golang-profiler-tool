@@ -1,4 +1,4 @@
-package com.gfb.golang_profiler_tool;
+package com.gfb.golang_profiler_tool.action;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
