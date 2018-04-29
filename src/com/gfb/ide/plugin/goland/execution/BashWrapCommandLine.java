@@ -1,4 +1,4 @@
-package com.gfb.golang_profiler_tool.run.configuration.execution;
+package com.gfb.ide.plugin.goland.execution;
 
 import com.intellij.execution.configurations.GeneralCommandLine;
 import org.jetbrains.annotations.NotNull;

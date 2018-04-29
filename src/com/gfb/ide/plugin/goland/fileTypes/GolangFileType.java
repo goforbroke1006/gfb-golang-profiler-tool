@@ -1,4 +1,4 @@
-package com.gfb.golang_profiler_tool.fileTypes;
+package com.gfb.ide.plugin.goland.fileTypes;
 
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.fileTypes.LanguageFileType;

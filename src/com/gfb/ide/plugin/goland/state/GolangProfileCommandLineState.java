@@ -1,6 +1,7 @@
-package com.gfb.golang_profiler_tool.run.configuration;
+package com.gfb.ide.plugin.goland.state;
 
-import com.gfb.golang_profiler_tool.run.configuration.execution.BashWrapCommandLine;
+import com.gfb.ide.plugin.goland.run.configuration.RunConfiguration;
+import com.gfb.ide.plugin.goland.execution.BashWrapCommandLine;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.*;
 import com.intellij.execution.process.*;
@@ -11,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
  * Created by SCherk01 on 31.08.17.
  */
 public class GolangProfileCommandLineState extends CommandLineState {
-    private GolangProfilerRunConfiguration configuration;
+    private RunConfiguration configuration;
 
-    protected GolangProfileCommandLineState(@NotNull ExecutionEnvironment environment, GolangProfilerRunConfiguration configuration) {
+    public GolangProfileCommandLineState(@NotNull ExecutionEnvironment environment, RunConfiguration configuration) {
         super(environment);
         this.configuration = configuration;
     }
@@ -21,6 +22,7 @@ public class GolangProfileCommandLineState extends CommandLineState {
     @NotNull
     @Override
     protected ProcessHandler startProcess() throws ExecutionException {
+        System.getenv("GOROOT");
         String goExePath = "/usr/local/go/bin/go"; // TODO: workaround for first tests on IDEA under Centos
 
         String scriptFilename = configuration.getScriptFilename();

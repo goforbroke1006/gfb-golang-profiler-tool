@@ -1,4 +1,4 @@
-package com.gfb.golang_profiler_tool.action;
+package com.gfb.ide.plugin.goland.action;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -8,7 +8,7 @@ import com.intellij.openapi.ui.Messages;
 
 import java.io.IOException;
 
-public class ReloadAction extends AnAction {
+public class BenchmarkAnalysisAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent event) {

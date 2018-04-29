@@ -1,12 +1,11 @@
 <idea-plugin>
-    <id>com.gfb.golang_profiler_tool</id>
-    <name>Golang profiler tool</name>
+    <id>com.gfb.ide.plugin.goland</id>
+    <name>GFB Goland Tool</name>
     <version>1.0</version>
     <vendor email="go.for.broke1006@gmail.com" url="https://www.facebook.com/goforbroke1006">GoForBroke</vendor>
 
     <description><![CDATA[
-        I need interactive profiler for coding under Golang.<br>
-        I going write my own tool.
+        My own Golang helper.
     ]]></description>
 
     <change-notes><![CDATA[
@@ -26,13 +25,13 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
         <configurationType
-                implementation="com.gfb.golang_profiler_tool.run.configuration.GolangProfilerRunConfigurationType"/>
+                implementation="com.gfb.ide.plugin.goland.run.configuration.PluginRunConfigurationType"/>
     </extensions>
 
     <actions>
         <!-- Add your actions here -->
-        <action id="GfbGolangProfiler.Reload" class="com.gfb.golang_profiler_tool.action.ReloadAction" text="Reload"
-                description="Reload profiling data">
+        <action id="GfbGolangTool.BenchmarkAnalysis" class="com.gfb.ide.plugin.goland.action.BenchmarkAnalysisAction"
+                text="Benchmark analysis" description="Reload benchmark data">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt P"/>
         </action>

@@ -1,5 +1,7 @@
-package com.gfb.golang_profiler_tool.run.configuration;
+package com.gfb.ide.plugin.goland.run.configuration;
 
+import com.gfb.ide.plugin.goland.settings.MainViewSettingsEditor;
+import com.gfb.ide.plugin.goland.state.GolangProfileCommandLineState;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.*;
@@ -9,21 +11,18 @@ import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Created by SCherk01 on 30.08.17.
- */
-public class GolangProfilerRunConfiguration extends RunConfigurationBase {
+public class RunConfiguration extends RunConfigurationBase {
     private String scriptFilename = "/home/SCherk01/projects/go-learn/monolog_analyzer.go";
     private String programRunParameters = "-file=/home/SCherk01/test.log";
 
-    public GolangProfilerRunConfiguration(Project project, GolangProfilerConfigurationFactory factory, String name) {
+    public RunConfiguration(Project project, ConfigurationFactory factory, String name) {
         super(project, factory, name);
     }
 
     @NotNull
     @Override
-    public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
-        return new GolangProfilerSettingsEditor(getProject());
+    public SettingsEditor<? extends com.intellij.execution.configurations.RunConfiguration> getConfigurationEditor() {
+        return new MainViewSettingsEditor(getProject());
     }
 
     @Override

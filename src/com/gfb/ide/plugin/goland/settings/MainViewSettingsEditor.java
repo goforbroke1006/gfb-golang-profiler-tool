@@ -1,6 +1,6 @@
-package com.gfb.golang_profiler_tool.run.configuration;
+package com.gfb.ide.plugin.goland.settings;
 
-import com.intellij.openapi.editor.textarea.TextAreaDocument;
+import com.gfb.ide.plugin.goland.run.configuration.RunConfiguration;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.options.ConfigurationException;
@@ -9,31 +9,27 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.ComponentWithBrowseButton;
 import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import com.intellij.openapi.ui.PanelWithText;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
-/**
- * Created by SCherk01 on 30.08.17.
- */
-public class GolangProfilerSettingsEditor extends SettingsEditor<GolangProfilerRunConfiguration> {
+public class MainViewSettingsEditor extends SettingsEditor<RunConfiguration> {
     private Project project;
     private TextFieldWithBrowseButton scriptNameTextField;
     private JTextArea programRunArgumentsTextArea;
 
-    public GolangProfilerSettingsEditor(Project project) {
+    public MainViewSettingsEditor(Project project) {
         super();
         this.project = project;
     }
 
     @Override
-    protected void resetEditorFrom(@NotNull GolangProfilerRunConfiguration golangProfilerRunConfiguration) {
+    protected void resetEditorFrom(@NotNull RunConfiguration runConfiguration) {
 
     }
 
     @Override
-    protected void applyEditorTo(@NotNull GolangProfilerRunConfiguration configuration) throws ConfigurationException {
+    protected void applyEditorTo(@NotNull RunConfiguration configuration) throws ConfigurationException {
         // TODO: I do not know how data applies from editor to configuration and vice versa
 
         if (!scriptNameTextField.getText().isEmpty() && !scriptNameTextField.getText().equals(configuration.getScriptFilename())) {

@@ -1,6 +1,5 @@
-package com.gfb.golang_profiler_tool.run.configuration;
+package com.gfb.ide.plugin.goland.run.configuration;
 
-import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationType;
 import com.intellij.icons.AllIcons;
 import org.jetbrains.annotations.NotNull;
@@ -10,15 +9,15 @@ import javax.swing.*;
 /**
  * Created by SCherk01 on 30.08.17.
  */
-public class GolangProfilerRunConfigurationType implements ConfigurationType {
+public class PluginRunConfigurationType implements ConfigurationType {
     @Override
     public String getDisplayName() {
-        return "Golang Profiler";
+        return "GFB Golang Tool";
     }
 
     @Override
     public String getConfigurationTypeDescription() {
-        return "Golang Profiler Configuration Type";
+        return getDisplayName() + " Configuration Type";
     }
 
     @Override
@@ -29,11 +28,13 @@ public class GolangProfilerRunConfigurationType implements ConfigurationType {
     @NotNull
     @Override
     public String getId() {
-        return "GOLANG_PROFILER_RUN_CONFIGURATION";
+        return "GFB_GOLANG_TOOL_RUN_CONFIGURATION";
     }
 
     @Override
-    public ConfigurationFactory[] getConfigurationFactories() {
-        return new ConfigurationFactory[]{new GolangProfilerConfigurationFactory(this)};
+    public com.intellij.execution.configurations.ConfigurationFactory[] getConfigurationFactories() {
+        return new com.intellij.execution.configurations.ConfigurationFactory[]{
+                new ConfigurationFactory(this),
+        };
     }
 }
