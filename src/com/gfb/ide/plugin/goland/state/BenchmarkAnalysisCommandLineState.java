@@ -8,13 +8,10 @@ import com.intellij.execution.process.*;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by SCherk01 on 31.08.17.
- */
-public class GolangProfileCommandLineState extends CommandLineState {
+public class BenchmarkAnalysisCommandLineState extends CommandLineState {
     private RunConfiguration configuration;
 
-    public GolangProfileCommandLineState(@NotNull ExecutionEnvironment environment, RunConfiguration configuration) {
+    public BenchmarkAnalysisCommandLineState(@NotNull ExecutionEnvironment environment, RunConfiguration configuration) {
         super(environment);
         this.configuration = configuration;
     }
@@ -22,8 +19,9 @@ public class GolangProfileCommandLineState extends CommandLineState {
     @NotNull
     @Override
     protected ProcessHandler startProcess() throws ExecutionException {
-        System.getenv("GOROOT");
-        String goExePath = "/usr/local/go/bin/go"; // TODO: workaround for first tests on IDEA under Centos
+        String goroot = System.getenv("GOROOT");
+        if (goroot.isEmpty()) throw new RuntimeException("GOROOT environment variable should be defined!");
+        String goExePath = goroot + "/bin/go";
 
         String scriptFilename = configuration.getScriptFilename();
         final String binFilename = scriptFilename.replace(".go", "");

@@ -1,7 +1,7 @@
 package com.gfb.ide.plugin.goland.run.configuration;
 
 import com.gfb.ide.plugin.goland.settings.MainViewSettingsEditor;
-import com.gfb.ide.plugin.goland.state.GolangProfileCommandLineState;
+import com.gfb.ide.plugin.goland.state.BenchmarkAnalysisCommandLineState;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.*;
@@ -33,7 +33,7 @@ public class RunConfiguration extends RunConfigurationBase {
     @Nullable
     @Override
     public RunProfileState getState(@NotNull final Executor executor, @NotNull final ExecutionEnvironment executionEnvironment) throws ExecutionException {
-        return new GolangProfileCommandLineState(executionEnvironment, this);
+        return new BenchmarkAnalysisCommandLineState(executionEnvironment, this);
     }
 
     public String getScriptFilename() {
