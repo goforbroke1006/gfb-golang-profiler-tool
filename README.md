@@ -1,4 +1,4 @@
-# gfb-golang-profiler-tool
+# gfb-golang-tool
 
 Plugin for Intellij IDEA.
 
